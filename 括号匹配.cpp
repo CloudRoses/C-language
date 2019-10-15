@@ -1,6 +1,4 @@
-/*
-	数据结构 3.19
-*/
+
 
 
 #include<stdio.h>
@@ -37,7 +35,7 @@ Status initStack(Stack &stack) {
 
 Status push(Stack &stack, char bracket) {
 	if (stack.stackSize >= 100) {
-		printf("栈已满，无法入栈");
+		printf("Error,stack is full!");
 		return ERROR;
 	}
 
@@ -52,7 +50,7 @@ Status push(Stack &stack, char bracket) {
 
 Status pop(Stack &stack, char &bracket) {
 	if (stack.stackSize <= 0) {
-		printf("栈空，无法弹栈");
+		printf("Error,stack is empty!");
 		return ERROR;
 	}
 
@@ -102,7 +100,7 @@ Status getInputBracketList(BracketList &bracketList) {
 	
 	while (1) {
 		char bracket;
-		printf("请输入括号:");
+		printf("please input a bracket:");
 		scanf_s("%c", &bracket, 1);
 		getchar();
 
@@ -135,7 +133,7 @@ int judge(Stack stack, BracketList bracketList) {
 				break;
 			case 1:
 				if (stack.stackSize == 0) {
-					printf("错误！不能先输入右括号");
+					printf("Error,right bracket can not input first!");
 					return ERROR;
 				}//if
 
@@ -143,7 +141,7 @@ int judge(Stack stack, BracketList bracketList) {
 				int getBracketColumn = traversColumn(getBracket);
 
 				if (stackBracketColumn != getBracketColumn) {
-					printf("括号匹配不正确,没有与右括号匹配的左括号");
+					printf("Error,can not match the left bracket!");
 					return ERROR;
 				}
 				else {
@@ -161,11 +159,11 @@ int judge(Stack stack, BracketList bracketList) {
 	}//while
 	
 	if (stack.stackSize != 0) {
-		printf("括号匹配不正确，左括号未匹配完");
+		printf("Error,leave left bracket!");
 		return ERROR;
 	}
 	
-	printf("括号匹配正确");
+	printf("Ok,match!");
 	return OK;
 }//judge
 
@@ -187,29 +185,6 @@ int main() {
 		printf("congradualation!");
 	}
 	else {
-		printf("bug......");
+		printf("bug......")
 	}
-/*		遍历行与列的测试代码
-	char bracket = '}';
-	int a = traversRow(bracket);
-	int b = traversColumn(bracket);
-	printf("%d",a);
-
-	printf("%d",b);
-	*/
-
-/*		pop的测试代码
-	char bracket;
-	pop(stack, bracket);
-*/
-
-/*		push的测试代码
-	
-	char test = '(';
-	push(stack, test);
-
-	printf("%c", *(stack.top - 1));
-*/
-
-//测试输入的括号所用	printf("%s", bracketList);
 }
